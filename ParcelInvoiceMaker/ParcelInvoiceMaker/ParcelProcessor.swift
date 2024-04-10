@@ -7,9 +7,8 @@
 import Foundation
 
 class ParcelInformation {
-    let address: String
-    var receiverName: String
-    var receiverMobile: String
+    let receiverInfomation: ReceiverInfomation
+    
     let deliveryCost: Int
     private let discount: Discount
     var discountedCost: Int {
@@ -23,14 +22,14 @@ class ParcelInformation {
         }
     }
 
-    init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
-        self.address = address
-        self.receiverName = receiverName
-        self.receiverMobile = receiverMobile
+    
+    init(receiverInfomation: ReceiverInfomation, deliveryCost: Int, discount: Discount) {
+        self.receiverInfomation = receiverInfomation
         self.deliveryCost = deliveryCost
         self.discount = discount
     }
 }
+
 
 enum Discount: Int {
     case none = 0, vip, coupon

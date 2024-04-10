@@ -35,14 +35,22 @@ enum Discount: Int {
     case none = 0, vip, coupon
 }
 
-class ParcelOrderProcessor {
+protocol OrderProcessor {
+    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
+}
+
+class ParcelOrderProcessor: OrderProcessor {
     
-    private var databaseParcelInformationPersistence = DatabaseParcelInformationPersistence()
+    private let parcelInformationPersistence: ParcelInformationPersistence
+    
+    init(parcelInformationPersistence: ParcelInformationPersistence) {
+        self.parcelInformationPersistence = parcelInformationPersistence
+    }
     
     // 택배 주문 처리 로직
     func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
         
-        databaseParcelInformationPersistence.save(parcelInformation: parcelInformation) {
+        parcelInformationPersistence.save(parcelInformation: parcelInformation) {
             onComplete(parcelInformation)
         }
     }

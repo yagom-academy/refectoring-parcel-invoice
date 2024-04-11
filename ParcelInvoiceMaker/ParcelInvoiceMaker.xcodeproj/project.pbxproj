@@ -18,6 +18,7 @@
 		C741F5142B468AC300A4DDC0 /* InvoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C741F5132B468AC300A4DDC0 /* InvoiceView.swift */; };
 		D4C5F2BF2BC6A062008055B5 /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5F2BE2BC6A062008055B5 /* Receiver.swift */; };
 		D4C5F2C12BC6A3FE008055B5 /* DatabaseParcelInformationPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5F2C02BC6A3FE008055B5 /* DatabaseParcelInformationPersistence.swift */; };
+		D4C5F2C32BC783C0008055B5 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5F2C22BC783C0008055B5 /* DIContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		C741F5132B468AC300A4DDC0 /* InvoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceView.swift; sourceTree = "<group>"; };
 		D4C5F2BE2BC6A062008055B5 /* Receiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receiver.swift; sourceTree = "<group>"; };
 		D4C5F2C02BC6A3FE008055B5 /* DatabaseParcelInformationPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseParcelInformationPersistence.swift; sourceTree = "<group>"; };
+		D4C5F2C22BC783C0008055B5 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 			children = (
 				C741F4F92B46658300A4DDC0 /* AppDelegate.swift */,
 				C741F4FB2B46658300A4DDC0 /* SceneDelegate.swift */,
+				D4C5F2C22BC783C0008055B5 /* DIContainer.swift */,
 				C741F4FD2B46658300A4DDC0 /* ParcelOrderViewController.swift */,
 				C741F5112B468AA300A4DDC0 /* ParcelOrderView.swift */,
 				C741F50F2B4675AF00A4DDC0 /* InvoiceViewController.swift */,
@@ -154,6 +157,7 @@
 			files = (
 				C741F4FE2B46658300A4DDC0 /* ParcelOrderViewController.swift in Sources */,
 				C741F5142B468AC300A4DDC0 /* InvoiceView.swift in Sources */,
+				D4C5F2C32BC783C0008055B5 /* DIContainer.swift in Sources */,
 				C741F4FA2B46658300A4DDC0 /* AppDelegate.swift in Sources */,
 				C741F50E2B46659500A4DDC0 /* ParcelProcessor.swift in Sources */,
 				D4C5F2BF2BC6A062008055B5 /* Receiver.swift in Sources */,

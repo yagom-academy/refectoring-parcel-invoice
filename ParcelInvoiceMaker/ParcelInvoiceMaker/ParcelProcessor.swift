@@ -39,7 +39,7 @@ protocol OrderProcessor {
     func process(parcelInformation: ParcelInformation, onComplete: @escaping (ParcelInformation) -> Void)
 }
 
-class ParcelOrderProcessor: OrderProcessor {
+final class ParcelOrderProcessor: OrderProcessor {
     
     private let parcelInformationPersistence: ParcelInformationPersistable
     

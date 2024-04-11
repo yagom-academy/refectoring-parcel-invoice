@@ -7,7 +7,7 @@
 import Foundation
 
 class ParcelInformation {
-    let receiverInfomation: ReceiverInfomation
+    let receiverInfomation: Receiver.Infomation
     
     let deliveryCost: Int
     private let discount: Discount
@@ -23,7 +23,7 @@ class ParcelInformation {
     }
 
     
-    init(receiverInfomation: ReceiverInfomation, deliveryCost: Int, discount: Discount) {
+    init(receiverInfomation: Receiver.Infomation, deliveryCost: Int, discount: Discount) {
         self.receiverInfomation = receiverInfomation
         self.deliveryCost = deliveryCost
         self.discount = discount

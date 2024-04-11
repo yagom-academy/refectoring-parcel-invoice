@@ -36,7 +36,7 @@ enum Discount: Int {
 }
 
 protocol OrderProcessor {
-    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
+    func process(parcelInformation: ParcelInformation, onComplete: @escaping (ParcelInformation) -> Void)
 }
 
 class ParcelOrderProcessor: OrderProcessor {
@@ -48,8 +48,8 @@ class ParcelOrderProcessor: OrderProcessor {
     }
     
     // 택배 주문 처리 로직
-    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
-        
+    func process(parcelInformation: ParcelInformation, onComplete: @escaping (ParcelInformation) -> Void) {
+
         parcelInformationPersistence.save(parcelInformation: parcelInformation) {
             onComplete(parcelInformation)
         }

@@ -21,9 +21,9 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
     }
     
     func parcelOrderMade(_ parcelInformation: ParcelInformation) {
-        orderProcessor.process(parcelInformation: parcelInformation) { parcelInformation in
+        orderProcessor.process(parcelInformation: parcelInformation) { [weak self] parcelInformation in
             let invoiceViewController: InvoiceViewController = .init(parcelInformation: parcelInformation)
-            navigationController?.pushViewController(invoiceViewController, animated: true)
+            self?.navigationController?.pushViewController(invoiceViewController, animated: true)
         }
     }
     

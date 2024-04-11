@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol ParcelInformationPersistence {
+protocol ParcelInformationPersistable {
     func save(parcelInformation: ParcelInformation, onSuccess: () -> Void)
 }
 
-struct DatabaseParcelInformationPersistence: ParcelInformationPersistence {
+struct DatabaseParcelInformationPersistence: ParcelInformationPersistable {
  
     func save(parcelInformation: ParcelInformation, onSuccess: () -> Void) {
         // 데이터베이스에 주문 정보 저장

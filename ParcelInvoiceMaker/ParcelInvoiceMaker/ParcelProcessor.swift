@@ -41,9 +41,9 @@ protocol OrderProcessor {
 
 class ParcelOrderProcessor: OrderProcessor {
     
-    private let parcelInformationPersistence: ParcelInformationPersistence
+    private let parcelInformationPersistence: ParcelInformationPersistable
     
-    init(parcelInformationPersistence: ParcelInformationPersistence) {
+    init(parcelInformationPersistence: ParcelInformationPersistable) {
         self.parcelInformationPersistence = parcelInformationPersistence
     }
     

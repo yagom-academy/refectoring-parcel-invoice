@@ -8,7 +8,7 @@ import UIKit
 
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
     
-    private var orderProcessor: OrderProcessor
+    private let orderProcessor: OrderProcessor
     
     init(orderProcessor: OrderProcessor) {
         self.orderProcessor = orderProcessor

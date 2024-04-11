@@ -28,6 +28,10 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
     override func loadView() {
         view = ParcelOrderView(delegate: self)
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 
 }
 

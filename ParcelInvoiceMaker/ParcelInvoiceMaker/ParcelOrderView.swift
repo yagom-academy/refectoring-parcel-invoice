@@ -76,11 +76,18 @@ class ParcelOrderView: UIView {
             return
         }
         
-        let parcelInformation: ParcelInformation = .init(address: address,
-                                                         receiverName: name,
-                                                         receiverMobile: mobile,
-                                                         deliveryCost: cost,
-                                                         discount: discount)
+        //yujeong - MARK: STEP 1-1 Refactoring Code (객체미용체조 7원칙)
+        //각 인스턴스들을 차례로 생성 - yujeong
+        let initAddress = Address(value: address)
+        let initName = Name(value: name)
+        let initMobile = Mobile(value: mobile)
+        let initReceiverInfo = ReceiverInfo(address: initAddress, receiverName: initName, receiverMobile: initMobile)
+        
+        let initDeliveryCost = Cost(value: cost)
+        let initDiscountCost = DiscountedCost(value: cost, discount: discount)
+        let initCostInfo = CostInfo(deliveryCost: initDeliveryCost, discountedCost: initDiscountCost)
+        
+        let parcelInformation: ParcelInformation = .init(receiverInfo: initReceiverInfo, costInfo: initCostInfo)
         delegate.parcelOrderMade(parcelInformation)
     }
     

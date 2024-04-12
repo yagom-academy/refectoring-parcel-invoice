@@ -23,10 +23,6 @@ class ParcelInformation {
 }
 
 
-//enum Discount: Int {
-//    case none = 0, vip, coupon
-//}
-
 protocol OrderProcessor {
     func process(parcelInformation: ParcelInformation, onComplete: @escaping (ParcelInformation) -> Void)
 }

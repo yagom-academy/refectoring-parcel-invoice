@@ -18,6 +18,12 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func showErrorAlert() {
+        let alert = UIAlertController(title: "error", message: "error! error!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "confirm", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+    
     func parcelOrderMade(_ parcelInformation: ParcelInformation) {
         parcelProcessor.process(parcelInformation: parcelInformation) { (parcelInformation) in
             let invoiceViewController: InvoiceViewController = .init(parcelInformation: parcelInformation)

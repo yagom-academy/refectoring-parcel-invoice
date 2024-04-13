@@ -114,14 +114,6 @@ class ParcelInformation {
         self.deliveryCost = deliveryCost
         self.discount = discount
     }
-
-//    init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
-//        self.address = address
-//        self.receiverName = receiverName
-//        self.receiverMobile = receiverMobile
-//        self.deliveryCost = deliveryCost
-//        self.discount = discount
-//    }
 }
 
 enum Discount: Int {

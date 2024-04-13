@@ -120,20 +120,28 @@ enum Discount: Int {
     case none = 0, vip, coupon
 }
 
-class ParcelOrderProcessor {
-    private let databaseProcessor: DatabaseParcelInformationPersistence = .init()
+protocol ParcelInformationPersistence {
+    func save(parcelInformation: ParcelInformation)
+}
+
+class ParcelOrderProcessor: ParcelOrderProtocol {
+    private var delegate: ParcelInformationPersistence
+    
+    init(delegate: ParcelInformationPersistence) {
+        self.delegate = delegate
+    }
     
     // 택배 주문 처리 로직
     func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
         
         // 데이터베이스에 주문 저장
-        databaseProcessor.save(parcelInformation: parcelInformation)
+        delegate.save(parcelInformation: parcelInformation)
         
         onComplete(parcelInformation)
     }
 }
 
-class DatabaseParcelInformationPersistence {
+class DatabaseParcelInformationPersistence: ParcelInformationPersistence {
     func save(parcelInformation: ParcelInformation) {
         // 데이터베이스에 주문 정보 저장
         print("발송 정보를 데이터베이스에 저장했습니다.\n\(parcelInformation)")

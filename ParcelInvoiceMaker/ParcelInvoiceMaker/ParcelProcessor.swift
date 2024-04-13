@@ -10,7 +10,7 @@ struct Address {
     private let address: String
     init(value: String) throws {
         guard !value.isEmpty else {
-            throw NSError() as Error
+            throw errorAddress.empty
         }
         self.address = value
     }
@@ -20,11 +20,15 @@ struct Address {
     }
 }
 
+enum errorAddress: Error {
+    case empty
+}
+
 struct Name {
     private let name: String
     init(value: String) throws {
         guard !value.isEmpty else {
-            throw NSError() as Error
+            throw errorName.empty
         }
         self.name = value
     }
@@ -32,6 +36,10 @@ struct Name {
     func getName() -> String {
         return self.name
     }
+}
+
+enum errorName: Error {
+    case empty
 }
 
 struct Mobile {
@@ -47,10 +55,18 @@ struct Mobile {
     }
     
     private static func validate(value: String) throws {
-        guard !value.isEmpty && value.count < 13 else {
-            throw NSError() as Error
+        guard !value.isEmpty else {
+            throw errorMobile.empty
+        }
+        guard value.count < 13 else {
+            throw errorMobile.rangeOver
         }
     }
+}
+
+enum errorMobile: Error {
+    case empty
+    case rangeOver
 }
 
 struct Person {

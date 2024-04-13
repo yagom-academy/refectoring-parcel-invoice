@@ -66,9 +66,9 @@ class ParcelOrderView: UIView {
               let mobile: String = receiverMobileField.text,
               let address: String = addressField.text,
               let costString: String = costField.text,
-              name.isEmpty == false,
-              mobile.isEmpty == false,
-              address.isEmpty == false,
+              //name.isEmpty == false,
+              //mobile.isEmpty == false,
+              //address.isEmpty == false,
               costString.isEmpty == false,
               let cost: Int = Int(costString),
               let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex)

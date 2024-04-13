@@ -6,10 +6,80 @@
 
 import Foundation
 
+struct Address {
+    private let address: String
+    init(value: String) throws {
+        guard !value.isEmpty else {
+            throw NSError() as Error
+        }
+        self.address = value
+    }
+    
+    func getAddress() -> String {
+        return self.address
+    }
+}
+
+struct Name {
+    private let name: String
+    init(value: String) throws {
+        guard !value.isEmpty else {
+            throw NSError() as Error
+        }
+        self.name = value
+    }
+    
+    func getName() -> String {
+        return self.name
+    }
+}
+
+struct Mobile {
+    private let mobile: String
+    
+    init(value: String) throws {
+        try Self.validate(value: value)
+        self.mobile = value
+    }
+    
+    func getMobile() -> String {
+        return self.mobile
+    }
+    
+    private static func validate(value: String) throws {
+        guard !value.isEmpty && value.count < 13 else {
+            throw NSError() as Error
+        }
+    }
+}
+
+struct Person {
+    private let address: Address
+    private var name: Name
+    private var mobile: Mobile
+    
+    init(address: Address, name: Name, mobile: Mobile) {
+        self.address = address
+        self.name = name
+        self.mobile = mobile
+    }
+    
+    func getAddress() -> String {
+        return self.address.getAddress()
+    }
+    func getName() -> String {
+        return self.name.getName()
+    }
+    func getMobile() -> String {
+        return self.mobile.getMobile()
+    }
+}
+
 class ParcelInformation {
-    let address: String
-    var receiverName: String
-    var receiverMobile: String
+//    let address: String
+//    var receiverName: String
+//    var receiverMobile: String
+    let receiver: Person
     let deliveryCost: Int
     private let discount: Discount
     var discountedCost: Int {
@@ -22,14 +92,20 @@ class ParcelInformation {
             return deliveryCost / 2
         }
     }
-
-    init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
-        self.address = address
-        self.receiverName = receiverName
-        self.receiverMobile = receiverMobile
+    
+    init(receiver: Person, deliveryCost: Int, discount: Discount) {
+        self.receiver = receiver
         self.deliveryCost = deliveryCost
         self.discount = discount
     }
+
+//    init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
+//        self.address = address
+//        self.receiverName = receiverName
+//        self.receiverMobile = receiverMobile
+//        self.deliveryCost = deliveryCost
+//        self.discount = discount
+//    }
 }
 
 enum Discount: Int {

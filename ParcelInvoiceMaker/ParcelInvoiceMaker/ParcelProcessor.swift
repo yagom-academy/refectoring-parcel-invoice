@@ -84,18 +84,23 @@ class DatabaseParcelInformationPersistence: ParcelInformationPersistence {
     }
 }
 
-class ParcelOrderProcessor {
-    private let parcelInfoPersistence: ParcelInformationPersistence
+class ParcelOrderProcessor: ParcelOrder {
+    private let databaseParcelInfoPersistence: ParcelInformationPersistence
     
     init(databaseParcelInfoPersistence: ParcelInformationPersistence) {
-        self.parcelInfoPersistence = databaseParcelInfoPersistence
+        self.databaseParcelInfoPersistence = databaseParcelInfoPersistence
+    }
+    
+    //ParcelOrderViewController에서 ParcelOrderProcessor 를 직접 소유하지 않기 위해 추상화 클래스 ParcelOrder를 활용 - yujeong
+    func initProcessor() -> ParcelOrderProcessor {
+        return ParcelOrderProcessor(databaseParcelInfoPersistence: self.databaseParcelInfoPersistence)
     }
     
     // 택배 주문 처리 로직
     func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
         
         // 데이터베이스에 주문 저장
-        parcelInfoPersistence.save(parcelInformation: parcelInformation)
+        databaseParcelInfoPersistence.save(parcelInformation: parcelInformation)
         
         onComplete(parcelInformation)
     }

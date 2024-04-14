@@ -28,19 +28,51 @@ struct Cost {
     let value: Int
 }
 
+//yujeong - MARK: STEP 2-1 Refactoring Code (SOLID OCP / 객체 미용 체조 2원칙 적용)
 struct DiscountedCost {
     let value: Int
     private let discount: Discount
+    
     //init으로 값을 초기화하여 사용한다 - yujeong
     init(value: Int, discount: Discount) {
+        self.value = discount.strategy.applyDiscount(deliveryCost: value)
         self.discount = discount
-        switch discount {
+    }
+    
+}
+
+protocol DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int
+}
+
+struct NoDiscount: DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int {
+        return deliveryCost
+    }
+}
+
+struct VIPDiscount: DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int {
+        return deliveryCost / 5 * 4
+    }
+}
+
+struct CouponDiscount: DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int {
+        return deliveryCost / 2
+    }
+}
+
+enum Discount: Int {
+    case none = 0, vip, coupon
+    var strategy: DiscountStrategy {
+        switch self {
         case .none:
-            self.value = value
+            NoDiscount()
         case .vip:
-            self.value = value / 5 * 4
+            VIPDiscount()
         case .coupon:
-            self.value = value / 2
+            CouponDiscount()
         }
     }
 }
@@ -59,10 +91,6 @@ class ParcelInformation {
         self.receiverInfo = receiverInfo
         self.costInfo = costInfo
     }
-}
-
-enum Discount: Int {
-    case none = 0, vip, coupon
 }
 
 //yujeong - MARK: STEP 1-3 Refactoring Code (SOLID DIP 적용)

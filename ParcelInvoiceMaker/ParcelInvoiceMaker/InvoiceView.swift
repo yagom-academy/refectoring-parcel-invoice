@@ -20,21 +20,22 @@ class InvoiceView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //TODO: parcelInformation.receiver.receiverName 처럼 한 문장에 점이 2개씩 들어가는 부분에 대해 별도 처리가 필요할 것같다.
     private func layoutView() {
         let nameLabel: UILabel = UILabel()
         nameLabel.textColor = .black
         nameLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        nameLabel.text = "이름 : \(parcelInformation.receiverName)"
+        nameLabel.text = "이름 : \(parcelInformation.receiver.receiverName)"
         
         let mobileLabel: UILabel = UILabel()
         mobileLabel.textColor = .black
         mobileLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        mobileLabel.text = "전화 : \(parcelInformation.receiverMobile)"
+        mobileLabel.text = "전화 : \(parcelInformation.receiver.receiverMobile)"
         
         let addressLabel: UILabel = UILabel()
         addressLabel.textColor = .black
         addressLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        addressLabel.text = "주소 : \(parcelInformation.address)"
+        addressLabel.text = "주소 : \(parcelInformation.receiver.address)"
         
         let costLabel: UILabel = UILabel()
         costLabel.textColor = .black

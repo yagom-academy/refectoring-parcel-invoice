@@ -7,9 +7,11 @@
 import UIKit
 
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
-    private let parcelProcessor: ParcelOrderProcessor = ParcelOrderProcessor()
+    private var parcelProcessor: ParcelOrderProcessorProtocol
     
     init() {
+        //???: super은 상위 타입의 함수를 부를 때 쓰는 것인데 어느 때에는 맨 위에 자리해야하고 어느때에는 맨 밑에 있어야 하는지 모르겠다.
+        self.parcelProcessor = ParcelOrderProcessor()
         super.init(nibName: nil, bundle: nil)
         navigationItem.title = "택배보내기"
     }

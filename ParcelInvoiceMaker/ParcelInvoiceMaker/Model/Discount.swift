@@ -12,7 +12,7 @@ enum Discount: Int {
     var strategy: DiscountStrategy {
         switch self {
         case .none:
-            NoneStrategy()
+            NoneDiscountStrategy()
         case .vip:
             VipStrategy()
         case .coupon:
@@ -25,7 +25,7 @@ protocol DiscountStrategy {
     func applyDiscount(deliveryCost: Int) -> Int
 }
 
-private struct NoneStrategy: DiscountStrategy { 
+private struct NoneDiscountStrategy: DiscountStrategy {
     func applyDiscount(deliveryCost: Int) -> Int {
         return deliveryCost
     }

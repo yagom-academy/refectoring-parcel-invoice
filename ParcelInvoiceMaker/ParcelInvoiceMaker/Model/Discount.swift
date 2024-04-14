@@ -26,19 +26,19 @@ protocol DiscountStrategy {
 }
 
 private struct NoneDiscountStrategy: DiscountStrategy {
-    func applyDiscount(deliveryCost: Int) -> Int {
+    func applyDiscount(with deliveryCost: Int) -> Int {
         return deliveryCost
     }
 }
 
 private struct VipStrategy: DiscountStrategy {
-    func applyDiscount(deliveryCost: Int) -> Int {
+    func applyDiscount(with deliveryCost: Int) -> Int {
         return deliveryCost / 5 * 4
     }
 }
 
 private struct CouponStrategy: DiscountStrategy {
-    func applyDiscount(deliveryCost: Int) -> Int {
+    func applyDiscount(with deliveryCost: Int) -> Int {
         return deliveryCost / 2
     }
 }

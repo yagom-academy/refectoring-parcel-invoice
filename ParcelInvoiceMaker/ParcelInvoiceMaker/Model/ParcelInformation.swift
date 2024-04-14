@@ -13,7 +13,7 @@ struct ParcelInformation {
     private let deliveryCost: Int
     private let discount: Discount
     var discountedCost: Int {
-        discount.strategy.applyDiscount(deliveryCost: deliveryCost)
+        discount.strategy.applyDiscount(with deliveryCost: deliveryCost)
     }
     
     init(receiverInfomation: Receiver.Infomation, deliveryCost: Int, discount: Discount) {

@@ -91,6 +91,28 @@ struct Person {
     }
 }
 
+protocol DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int
+}
+
+struct NoDiscount: DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int {
+        return deliveryCost
+    }
+}
+
+struct VIPDiscount: DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int {
+        return deliveryCost / 5 * 4
+    }
+}
+
+struct CouponDiscount: DiscountStrategy {
+    func applyDiscount(deliveryCost: Int) -> Int {
+        return deliveryCost / 2
+    }
+}
+
 class ParcelInformation {
 //    let address: String
 //    var receiverName: String
@@ -99,14 +121,7 @@ class ParcelInformation {
     let deliveryCost: Int
     private let discount: Discount
     var discountedCost: Int {
-        switch discount {
-        case .none:
-            return deliveryCost
-        case .vip:
-            return deliveryCost / 5 * 4
-        case .coupon:
-            return deliveryCost / 2
-        }
+        discount.strategy.applyDiscount(deliveryCost: deliveryCost)
     }
     
     init(receiver: Person, deliveryCost: Int, discount: Discount) {
@@ -117,7 +132,17 @@ class ParcelInformation {
 }
 
 enum Discount: Int {
-    case none = 0, vip, coupon
+    case none = 0, vip = 1, coupon = 2
+    var strategy: DiscountStrategy {
+        switch self {
+        case .none:
+            return NoDiscount()
+        case .vip:
+            return VIPDiscount()
+        case .coupon:
+            return CouponDiscount()
+        }
+    }
 }
 
 protocol ParcelInformationPersistence {

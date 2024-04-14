@@ -7,9 +7,7 @@
 import Foundation
 
 class ParcelInformation {
-    let address: String
-    var receiverName: String
-    var receiverMobile: String
+    var receiver: ReceiverInformation
     let deliveryCost: Int
     private let discount: Discount
     var discountedCost: Int {
@@ -23,10 +21,10 @@ class ParcelInformation {
         }
     }
 
-    init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
-        self.address = address
-        self.receiverName = receiverName
-        self.receiverMobile = receiverMobile
+    init(receiver: ReceiverInformation,
+         deliveryCost: Int,
+         discount: Discount) {
+        self.receiver = receiver
         self.deliveryCost = deliveryCost
         self.discount = discount
     }
@@ -36,6 +34,11 @@ enum Discount: Int {
     case none = 0, vip, coupon
 }
 
+struct ReceiverInformation {
+    let address: String
+    let name: String
+    let mobile: String
+}
 class ParcelOrderProcessor {
     
     // 택배 주문 처리 로직

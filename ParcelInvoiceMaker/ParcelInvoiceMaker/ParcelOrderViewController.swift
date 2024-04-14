@@ -7,7 +7,10 @@
 import UIKit
 
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
-    private let parcelProcessor: ParcelOrderProcessor = ParcelOrderProcessor()
+    let parcelProcessor: ParcelOrderProcessor = {
+        var databaseParcelInformationPersistence = DatabaseParcelInformationPersistence()
+        return ParcelOrderProcessor(databaseParcelInformationPersistence: databaseParcelInformationPersistence)
+    }()
     
     init() {
         super.init(nibName: nil, bundle: nil)

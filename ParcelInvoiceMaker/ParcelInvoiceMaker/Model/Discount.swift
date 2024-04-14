@@ -22,7 +22,7 @@ enum Discount: Int {
 }
 
 protocol DiscountStrategy {
-    func applyDiscount(deliveryCost: Int) -> Int
+    func applyDiscount(with deliveryCost: Int) -> Int
 }
 
 private struct NoneDiscountStrategy: DiscountStrategy {

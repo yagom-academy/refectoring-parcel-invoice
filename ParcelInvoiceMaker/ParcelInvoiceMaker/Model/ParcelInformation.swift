@@ -10,16 +10,21 @@ import Foundation
 struct ParcelInformation {
     let receiverInfomation: Receiver.Infomation
     
-    private let deliveryCost: Int
-    private let discount: Discount
-    var discountedCost: Int {
-        discount.strategy.applyDiscount(with deliveryCost: deliveryCost)
-    }
+    private let deliveryCost: Int 
+    private let discountType: DiscountType
     
-    init(receiverInfomation: Receiver.Infomation, deliveryCost: Int, discount: Discount) {
+    init(receiverInfomation: Receiver.Infomation,
+         deliveryCost: Int,
+         discountType: DiscountType) {
         self.receiverInfomation = receiverInfomation
         self.deliveryCost = deliveryCost
-        self.discount = discount
+        self.discountType = discountType
+    }
+    
+    func getDiscountedCost() -> Int {
+        let discounter = Discounter()
+        let strategy = discounter.strategy(for: discountType)
+        return strategy.applyDiscount(with: deliveryCost)
     }
 }
 

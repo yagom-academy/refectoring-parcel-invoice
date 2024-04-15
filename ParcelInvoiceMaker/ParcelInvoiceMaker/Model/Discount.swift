@@ -7,10 +7,13 @@
 
 import Foundation
 
-enum Discount: Int {
+enum DiscountType: Int {
     case none, vip, coupon
-    var strategy: DiscountStrategy {
-        switch self {
+}
+
+struct Discounter {
+    func strategy(for discountType: DiscountType) -> DiscountStrategy {
+        switch discountType {
         case .none:
             NoneDiscountStrategy()
         case .vip:

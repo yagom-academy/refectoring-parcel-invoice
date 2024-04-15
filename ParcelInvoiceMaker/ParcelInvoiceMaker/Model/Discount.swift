@@ -22,6 +22,11 @@ enum DiscountType: Int, CaseIterable {
     }
 }
 
+enum DiscountRate {
+    static let vip: Int = 20
+    static let coupon: Int = 2
+}
+
 struct Discounter {
     func strategy(for discountType: DiscountType) -> DiscountStrategy {
         switch discountType {
@@ -47,12 +52,12 @@ private struct NoneDiscountStrategy: DiscountStrategy {
 
 private struct VipStrategy: DiscountStrategy {
     func applyDiscount(with deliveryCost: Int) -> Int {
-        return deliveryCost / 5 * 4
+        return deliveryCost / DiscountRate.vip
     }
 }
 
 private struct CouponStrategy: DiscountStrategy {
     func applyDiscount(with deliveryCost: Int) -> Int {
-        return deliveryCost / 2
+        return deliveryCost / DiscountRate.coupon
     }
 }

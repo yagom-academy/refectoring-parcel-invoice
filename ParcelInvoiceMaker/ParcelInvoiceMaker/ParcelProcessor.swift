@@ -68,11 +68,11 @@ enum Discount: Int {
     var strategy: DiscountStrategy {
         switch self {
         case .none:
-            NoDiscount()
+            return NoDiscount()
         case .vip:
-            VIPDiscount()
+            return VIPDiscount()
         case .coupon:
-            CouponDiscount()
+            return CouponDiscount()
         }
     }
 }

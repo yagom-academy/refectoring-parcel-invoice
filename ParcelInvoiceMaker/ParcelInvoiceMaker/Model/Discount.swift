@@ -7,8 +7,19 @@
 
 import Foundation
 
-enum DiscountType: Int {
+enum DiscountType: Int, CaseIterable {
     case none, vip, coupon
+    
+    var title: String {
+        switch self {
+        case .none:
+            return "없음"
+        case .vip:
+            return "VIP"
+        case .coupon:
+            return "쿠폰"
+        }
+    }
 }
 
 struct Discounter {

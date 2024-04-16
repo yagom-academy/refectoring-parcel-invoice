@@ -42,9 +42,10 @@ class ParcelOrderView: UIView {
     
     private let discountSegmented: UISegmentedControl = {
         let control: UISegmentedControl = .init()
-        control.insertSegment(withTitle: "없음", at: 0, animated: false)
-        control.insertSegment(withTitle: "VIP", at: 1, animated: false)
-        control.insertSegment(withTitle: "쿠폰", at: 2, animated: false)
+
+        for discountType in DiscountType.allCases {
+            control.insertSegment(withTitle: discountType.title, at: discountType.rawValue, animated: false)
+        }
         control.selectedSegmentIndex = 0
         return control
     }()
@@ -71,16 +72,16 @@ class ParcelOrderView: UIView {
               address.isEmpty == false,
               costString.isEmpty == false,
               let cost: Int = Int(costString),
-              let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex)
+              let discountType: DiscountType = DiscountType(rawValue: discountSegmented.selectedSegmentIndex)
         else {
             return
         }
         
         let parcelInformation: ParcelInformation = .init(receiverInfomation: .init(address: address,
-                                                                             receiverName: name,
-                                                                             receiverMobile: mobile),
+                                                                                   name: name,
+                                                                                   mobile: mobile),
                                                          deliveryCost: cost,
-                                                         discount: discount)
+                                                         discountType: discountType)
         delegate.parcelOrderMade(parcelInformation)
     }
     

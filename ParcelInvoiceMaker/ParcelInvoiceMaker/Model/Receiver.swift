@@ -12,9 +12,9 @@ struct Receiver: Equatable {
 }
 
 extension Receiver {
-    struct Infomation {
+    struct Infomation: Equatable {
         let address: String
-        let receiverName: String
-        let receiverMobile: String
+        let name: String
+        let mobile: String
     }
 }

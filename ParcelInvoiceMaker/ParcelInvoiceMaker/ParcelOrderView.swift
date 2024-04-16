@@ -77,11 +77,10 @@ class ParcelOrderView: UIView {
             return
         }
         
-        let receiver : ReceiverInfo = ReceiverInfo(address: address,
-                                                   receiverName: name,
-                                                   receiverMobile: mobile)
-        
-        let parcelInformation: ParcelInformation = .init(receiver: receiver,
+        //S: UI에서 ReceiverInfo에 대해 굳이 알 필요는 없을 것같다.
+        let parcelInformation: ParcelInformation = .init(address: address,
+                                                         receiverName: name,
+                                                         receiverMobile: mobile,
                                                          deliveryCost: cost,
                                                          discount: discount)
         delegate.parcelOrderMade(parcelInformation)

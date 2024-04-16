@@ -13,8 +13,8 @@ protocol ParcelOrderProtocol {
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
     private var parcelOrderProcessor: ParcelOrderProtocol
     
-    init() {
-        self.parcelOrderProcessor = ParcelOrderProcessor(delegate: DatabaseParcelInformationPersistence())
+    init(parcelOrderProcessor: ParcelOrderProtocol = ParcelOrderProcessor(delegate: DatabaseParcelInformationPersistence())){
+        self.parcelOrderProcessor = parcelOrderProcessor
         
         super.init(nibName: nil, bundle: nil)
         navigationItem.title = "택배보내기"

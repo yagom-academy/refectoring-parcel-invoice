@@ -125,17 +125,17 @@ protocol ParcelInformationPersistence {
 }
 
 class ParcelOrderProcessor: ParcelOrderProtocol {
-    private var delegate: ParcelInformationPersistence
+    private var parceInfoPersistence: ParcelInformationPersistence
     
-    init(delegate: ParcelInformationPersistence) {
-        self.delegate = delegate
+    init(parceInfoPersistence: ParcelInformationPersistence) {
+        self.parceInfoPersistence = parceInfoPersistence
     }
     
     // 택배 주문 처리 로직
     func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
         
         // 데이터베이스에 주문 저장
-        delegate.save(parcelInformation: parcelInformation)
+        parceInfoPersistence.save(parcelInformation: parcelInformation)
         
         onComplete(parcelInformation)
     }

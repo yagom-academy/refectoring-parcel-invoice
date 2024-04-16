@@ -8,7 +8,7 @@
 import Foundation
 
 enum DiscountType: Int, CaseIterable {
-    case none, vip, coupon
+    case none, vip, coupon, clearance
     
     var title: String {
         switch self {
@@ -18,6 +18,8 @@ enum DiscountType: Int, CaseIterable {
             return "VIP"
         case .coupon:
             return "쿠폰"
+        case .clearance:
+            return "클리어런스"
         }
     }
 }
@@ -25,6 +27,7 @@ enum DiscountType: Int, CaseIterable {
 enum DiscountRate {
     static let vip: Int = 20
     static let coupon: Int = 2
+    static let clearance: Int = 90
 }
 
 struct Discounter {
@@ -36,6 +39,8 @@ struct Discounter {
             VipStrategy()
         case .coupon:
             CouponStrategy()
+        case .clearance:
+            ClearanceStrategy()
         }
     }
 }
@@ -59,5 +64,11 @@ private struct VipStrategy: DiscountStrategy {
 private struct CouponStrategy: DiscountStrategy {
     func applyDiscount(with deliveryCost: Int) -> Int {
         return deliveryCost / DiscountRate.coupon
+    }
+}
+
+private struct ClearanceStrategy: DiscountStrategy {
+    func applyDiscount(with deliveryCost: Int) -> Int {
+        return deliveryCost / DiscountRate.clearance
     }
 }

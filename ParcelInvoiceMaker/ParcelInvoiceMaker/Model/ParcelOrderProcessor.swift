@@ -7,7 +7,7 @@
 import Foundation
 
 protocol OrderProcessor {
-    func process(parcelInformation: ParcelInformation, onComplete: @escaping (ParcelInformation) -> Void)
+    func process(parcelInformation: ParcelInformation) async -> Void
 }
 
 final class ParcelOrderProcessor: OrderProcessor {
@@ -19,11 +19,8 @@ final class ParcelOrderProcessor: OrderProcessor {
     }
     
     // 택배 주문 처리 로직
-    func process(parcelInformation: ParcelInformation, onComplete: @escaping (ParcelInformation) -> Void) {
-
-        parcelInformationPersistence.save(parcelInformation: parcelInformation) {
-            onComplete(parcelInformation)
-        }
+    func process(parcelInformation: ParcelInformation) async {
+        await parcelInformationPersistence.save(parcelInformation: parcelInformation)
     }
 
 }

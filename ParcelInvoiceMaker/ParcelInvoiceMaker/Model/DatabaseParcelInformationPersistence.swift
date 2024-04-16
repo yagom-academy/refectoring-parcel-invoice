@@ -8,16 +8,13 @@
 import Foundation
 
 protocol ParcelInformationPersistable {
-    func save(parcelInformation: ParcelInformation, onSuccess: @escaping () -> Void)
+    func save(parcelInformation: ParcelInformation) async -> Void
 }
 
 struct DatabaseParcelInformationPersistence: ParcelInformationPersistable {
- 
-    func save(parcelInformation: ParcelInformation, onSuccess:  @escaping () -> Void) {
+    func save(parcelInformation: ParcelInformation) async {
         // 데이터베이스에 주문 정보 저장
         print("발송 정보를 데이터베이스에 저장했습니다.")
-        
-        onSuccess()
     }
     
 }

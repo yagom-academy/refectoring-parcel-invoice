@@ -50,6 +50,16 @@ class ParcelOrderView: UIView {
         return control
     }()
     
+    private let receiptSegmented: UISegmentedControl = {
+        let control: UISegmentedControl = .init()
+
+        for receiptType in ReceiptType.allCases {
+            control.insertSegment(withTitle: receiptType.title, at: receiptType.rawValue, animated: false)
+        }
+        control.selectedSegmentIndex = 0
+        return control
+    }()
+    
     init(delegate: ParcelOrderViewDelegate) {
         self.delegate = delegate
         super.init(frame: .zero)
@@ -72,7 +82,8 @@ class ParcelOrderView: UIView {
               address.isEmpty == false,
               costString.isEmpty == false,
               let cost: Int = Int(costString),
-              let discountType: DiscountType = DiscountType(rawValue: discountSegmented.selectedSegmentIndex)
+              let discountType: DiscountType = DiscountType(rawValue: discountSegmented.selectedSegmentIndex),
+              let receiptType: ReceiptType = ReceiptType(rawValue: receiptSegmented.selectedSegmentIndex)
         else {
             return
         }
@@ -81,7 +92,8 @@ class ParcelOrderView: UIView {
                                                                                    name: name,
                                                                                    mobile: mobile),
                                                          deliveryCost: cost,
-                                                         discountType: discountType)
+                                                         discountType: discountType, 
+                                                         receiptType: receiptType)
         delegate.parcelOrderMade(parcelInformation)
     }
     
@@ -115,10 +127,10 @@ class ParcelOrderView: UIView {
         discountLabel.text = "할인"
         discountLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
-        let notificationLabel: UILabel = UILabel()
-        notificationLabel.textColor = .black
-        notificationLabel.text = "알림"
-        notificationLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        let receiptLabel: UILabel = UILabel()
+        receiptLabel.textColor = .black
+        receiptLabel.text = "영수증"
+        receiptLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         let nameStackView: UIStackView = .init(arrangedSubviews: [nameLabel, receiverNameField])
         nameStackView.distribution = .fill
@@ -141,25 +153,40 @@ class ParcelOrderView: UIView {
         discountStackView.spacing = 8
         discountStackView.axis = .horizontal
         
+        let receiptStackView: UIStackView = .init(arrangedSubviews: [receiptLabel, receiptSegmented])
+        receiptStackView.spacing = 8
+        receiptStackView.axis = .horizontal
+        
         let makeOrderButton: UIButton = UIButton(type: .system)
         makeOrderButton.backgroundColor = .white
         makeOrderButton.setTitle("택배 보내기", for: .normal)
         makeOrderButton.addTarget(self, action: #selector(touchUpOrderButton), for: .touchUpInside)
         
-        let mainStackView: UIStackView = .init(arrangedSubviews: [logoImageView, nameStackView, mobileStackView, addressStackView, costStackView, discountStackView, makeOrderButton])
+        let mainStackView: UIStackView = .init(arrangedSubviews: [logoImageView, nameStackView, mobileStackView, addressStackView, costStackView, discountStackView, receiptStackView, makeOrderButton])
         mainStackView.axis = .vertical
         mainStackView.distribution = .fillEqually
         mainStackView.spacing = 8
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(mainStackView)
+
+        let scrollView: UIScrollView = .init()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(mainStackView)
+        addSubview(scrollView)
         
         let safeArea: UILayoutGuide = safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             logoImageView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.1),
-            mainStackView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 16),
-            mainStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
-            mainStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
-            mainStackView.bottomAnchor.constraint(lessThanOrEqualTo: safeArea.bottomAnchor, constant: -16)
+            scrollView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 0),
+            scrollView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 0),
+            scrollView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: 0),
+            scrollView.bottomAnchor.constraint(lessThanOrEqualTo: safeArea.bottomAnchor, constant: 0),
+
+            mainStackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16),
+            mainStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
+            mainStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
+            mainStackView.bottomAnchor.constraint(lessThanOrEqualTo: scrollView.bottomAnchor, constant: -16),
+            mainStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32)
+            
         ])
     }
 }

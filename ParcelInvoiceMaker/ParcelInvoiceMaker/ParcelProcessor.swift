@@ -20,45 +20,19 @@ import Foundation
  *  - ParcelOrderViewController의 의존성 역전을 고민해볼것.
  */
 
-//S: 객체미용원칙 3원칙에 따라 각각의 값은 "" 값이 들어가지 않도록 별도로 처리한다.
-//Swift는 class, struct, enum 인스턴스 선언 시 자동으로 default initialize 함수가 불러지며,
-//custom할 경우 custom initialize 함수가 불러진다.
-//???: 하고 싶었는데 String으로 전달되었을 때 바로 struct에 넣는 것에 대해서 공부가 필요하다.
-
-/*struct Address {
-    let address: String
-    init(address: String) throws {
-        if address == "" {
-            throw NSError() as Error
-        }
-        self.address = address
-    }
-}
-
-struct Name {
-    let name: String
-    init(name: String) throws {
-        if name == "" {
-            throw NSError() as Error
-        }
-        self.name = name
-    }
-}
-
-struct Mobile {
-    let mobile: String
-    init(mobile: String) throws {
-        if mobile == "" { //TODO: 람다식으로 바꾸면 좋을 것같다. - 인식되게..
-            throw NSError() as Error
-        }
-        self.mobile = mobile
-    }
-}*/
+//S: 객체미용원칙 3원칙에 따라 각각의 값은 별도의 양식대로 값이 들어왔는지를 검증하여 처리해야한다.
+//기본 값이 ""이 들어오는지는 UI 단에서 이미 검증하고 있기 때문에 여기서는 검증절차 생략
 
 struct ReceiverInfo {
-    let address: String //Address
-    var receiverName: String //Name
-    var receiverMobile: String //Mobile
+    let address: String
+    let receiverName: String
+    let receiverMobile: String
+    
+    init(address: String, receiverName: String, receiverMobile: String) {
+        self.address = address
+        self.receiverName = receiverName
+        self.receiverMobile = receiverMobile
+    }
 }
 
 class ParcelInformation {
@@ -80,8 +54,8 @@ class ParcelInformation {
         }
     }
 
-    init(receiver: ReceiverInfo, deliveryCost: Int, discount: Discount) {
-        self.receiver = receiver
+    init(address: String, receiverName: String, receiverMobile: String, deliveryCost: Int, discount: Discount) {
+        self.receiver = ReceiverInfo(address: address, receiverName: receiverName, receiverMobile: receiverMobile)
         self.deliveryCost = deliveryCost
         self.discount = discount
     }

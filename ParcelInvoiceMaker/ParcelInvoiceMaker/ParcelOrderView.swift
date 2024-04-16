@@ -73,14 +73,14 @@ class ParcelOrderView: UIView {
               let cost: Int = Int(costString),
               let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex)
         else {
+            //S: 값이 들어있지 않을 경우에 대해서는 여기서 처리함
             return
         }
         
-        let receiver : ReceiverInfo = ReceiverInfo(address: address,
-                                                   receiverName: name,
-                                                   receiverMobile: mobile)
-        
-        let parcelInformation: ParcelInformation = .init(receiver: receiver,
+        //S: UI에서 ReceiverInfo에 대해 굳이 알 필요는 없을 것같다.
+        let parcelInformation: ParcelInformation = .init(address: address,
+                                                         receiverName: name,
+                                                         receiverMobile: mobile,
                                                          deliveryCost: cost,
                                                          discount: discount)
         delegate.parcelOrderMade(parcelInformation)

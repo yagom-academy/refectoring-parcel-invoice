@@ -73,6 +73,7 @@ class ParcelOrderView: UIView {
               let cost: Int = Int(costString),
               let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex)
         else {
+            //S: 값이 들어있지 않을 경우에 대해서는 여기서 처리함
             return
         }
         

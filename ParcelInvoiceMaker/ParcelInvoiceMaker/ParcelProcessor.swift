@@ -20,15 +20,16 @@ import Foundation
  *  - ParcelOrderViewController의 의존성 역전을 고민해볼것.
  */
 
-//S: 객체미용원칙 3원칙에 따라 각각의 값은 "" 값이 들어가지 않도록 별도로 처리한다.
+//S: 객체미용원칙 3원칙에 따라 각각의 값은 별도의 양식대로 값이 들어왔는지를 검증하여 처리해야한다.
 //Swift는 class, struct, enum 인스턴스 선언 시 자동으로 default initialize 함수가 불러지며,
 //custom할 경우 custom initialize 함수가 불러진다.
-//???: 하고 싶었는데 String으로 전달되었을 때 바로 struct에 넣는 것에 대해서 공부가 필요하다.
+//FIX: 하고 싶었는데 String으로 전달되었을 때 바로 struct에 넣는 것에 대해서 공부가 필요하다. - OK
 
-/*struct Address {
+struct Address {
     let address: String
     init(address: String) throws {
         if address == "" {
+            print("Error! Address is empty")
             throw NSError() as Error
         }
         self.address = address
@@ -39,6 +40,7 @@ struct Name {
     let name: String
     init(name: String) throws {
         if name == "" {
+            print("Error! Name is empty")
             throw NSError() as Error
         }
         self.name = name
@@ -49,16 +51,23 @@ struct Mobile {
     let mobile: String
     init(mobile: String) throws {
         if mobile == "" { //TODO: 람다식으로 바꾸면 좋을 것같다. - 인식되게..
+            print("Error! Mobile is empty")
             throw NSError() as Error
         }
         self.mobile = mobile
     }
-}*/
+}
 
 struct ReceiverInfo {
-    let address: String //Address
-    var receiverName: String //Name
-    var receiverMobile: String //Mobile
+    let address: Address
+    let receiverName: Name
+    let receiverMobile: Mobile
+    
+    init(address: String, receiverName: String, receiverMobile: String) {
+        self.address = try! Address(address: address)
+        self.receiverName = try! Name(name: receiverName)
+        self.receiverMobile = try! Mobile(mobile: receiverMobile)
+    }
 }
 
 class ParcelInformation {

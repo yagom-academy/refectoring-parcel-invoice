@@ -24,10 +24,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let database = container.resolve(type: ParcelInformationPersistable.self)
         
         container.register(
-            type: OrderProcessor.self,
+            type: OrderProcessorable.self,
             component: ParcelOrderProcessor(parcelInformationPersistence: database))
         
-        let orderProcessor = container.resolve(type: OrderProcessor.self)
+        let orderProcessorable = container.resolve(type: OrderProcessorable.self)
         
         container.register(
             type: ReceiptProcessorable.self,
@@ -38,7 +38,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         container.register(
             type: ParcelOrderViewController.self,
-            component: ParcelOrderViewController(orderProcessor: orderProcessor,
+            component: ParcelOrderViewController(orderProcessorable: orderProcessorable,
                                                  receiptProcessorable: receiptProcessor))
         
         let viewController = container.resolve(type: ParcelOrderViewController.self)

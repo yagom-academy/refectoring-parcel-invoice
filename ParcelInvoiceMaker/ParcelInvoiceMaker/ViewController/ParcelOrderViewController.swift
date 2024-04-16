@@ -8,12 +8,12 @@ import UIKit
 
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
     
-    private let orderProcessor: OrderProcessor
+    private let orderProcessorable: OrderProcessorable
     private let receiptProcessorable: ReceiptProcessorable
     
-    init(orderProcessor: OrderProcessor,
+    init(orderProcessorable: OrderProcessorable,
          receiptProcessorable: ReceiptProcessorable) {
-        self.orderProcessor = orderProcessor
+        self.orderProcessorable = orderProcessorable
         self.receiptProcessorable = receiptProcessorable
         super.init(nibName: nil, bundle: nil)
         navigationItem.title = "택배보내기"
@@ -25,7 +25,7 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
 
     func parcelOrderMade(_ parcelInformation: ParcelInformation) {
         Task { 
-            await orderProcessor.process(parcelInformation: parcelInformation)
+            await orderProcessorable.process(parcelInformation: parcelInformation)
             await receiptProcessorable.send(parcelInformation: parcelInformation)
             goToInvoice(parcelInformation: parcelInformation)
         }

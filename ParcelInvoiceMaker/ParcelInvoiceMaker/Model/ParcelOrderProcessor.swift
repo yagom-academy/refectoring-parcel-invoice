@@ -6,11 +6,11 @@
 
 import Foundation
 
-protocol OrderProcessor {
+protocol OrderProcessorable {
     func process(parcelInformation: ParcelInformation) async -> Void
 }
 
-final class ParcelOrderProcessor: OrderProcessor {
+final class ParcelOrderProcessor: OrderProcessorable {
     
     private let parcelInformationPersistence: ParcelInformationPersistable
     

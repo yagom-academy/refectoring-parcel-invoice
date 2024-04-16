@@ -11,10 +11,10 @@ protocol ParcelOrderProtocol {
 }
 
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
-    private var delegate: ParcelOrderProtocol
+    private var parcelOrderProcessor: ParcelOrderProtocol
     
     init() {
-        self.delegate = ParcelOrderProcessor(delegate: DatabaseParcelInformationPersistence())
+        self.parcelOrderProcessor = ParcelOrderProcessor(delegate: DatabaseParcelInformationPersistence())
         
         super.init(nibName: nil, bundle: nil)
         navigationItem.title = "택배보내기"
@@ -31,7 +31,7 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
     }
     
     func parcelOrderMade(_ parcelInformation: ParcelInformation) {
-        delegate.process(parcelInformation: parcelInformation) { (parcelInformation) in
+        parcelOrderProcessor.process(parcelInformation: parcelInformation) { (parcelInformation) in
             let invoiceViewController: InvoiceViewController = .init(parcelInformation: parcelInformation)
             navigationController?.pushViewController(invoiceViewController, animated: true)
         }

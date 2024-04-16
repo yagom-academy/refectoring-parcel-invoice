@@ -8,9 +8,6 @@
 import Foundation
 
 class ParcelInformation {
-//    let address: String
-//    var receiverName: String
-//    var receiverMobile: String
     let receiver: Person
     let deliveryCost: Int
     private let discount: Discount

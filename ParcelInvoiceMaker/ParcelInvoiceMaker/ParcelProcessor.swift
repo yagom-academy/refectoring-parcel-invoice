@@ -7,7 +7,7 @@
 import Foundation
 
 protocol ParcelInformationPersistence {
-    func save(parcelInformation: ParcelInformation)
+    func save(parcelInformation: ParcelInformation) throws
 }
 
 class ParcelOrderProcessor: ParcelOrderProtocol {
@@ -18,10 +18,10 @@ class ParcelOrderProcessor: ParcelOrderProtocol {
     }
     
     // 택배 주문 처리 로직
-    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) {
+    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) throws {
         
         // 데이터베이스에 주문 저장
-        parceInfoPersistence.save(parcelInformation: parcelInformation)
+        try parceInfoPersistence.save(parcelInformation: parcelInformation)
         
         onComplete(parcelInformation)
     }

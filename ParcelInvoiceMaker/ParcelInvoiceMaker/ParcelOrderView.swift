@@ -8,7 +8,6 @@ import UIKit
 
 protocol ParcelOrderViewDelegate {
     func parcelOrderMade(_ parcelInformation: ParcelInformation)
-    func showErrorAlert()
 }
 
 class ParcelOrderView: UIView {
@@ -67,6 +66,9 @@ class ParcelOrderView: UIView {
               let mobile: String = receiverMobileField.text,
               let address: String = addressField.text,
               let costString: String = costField.text,
+              name.isEmpty == false,
+              mobile.isEmpty == false,
+              address.isEmpty == false,
               costString.isEmpty == false,
               let cost: Int = Int(costString),
               let discount: Discount = Discount(rawValue: discountSegmented.selectedSegmentIndex)
@@ -74,26 +76,8 @@ class ParcelOrderView: UIView {
             return
         }
         
-        do {
-            let parcelInformation: ParcelInformation = .init(receiver: Person(address: try Address(value: address), name: try Name(value: name), mobile: try Mobile(value: mobile)), deliveryCost: cost, discount: discount)
-            delegate.parcelOrderMade(parcelInformation)
-        } 
-        // 1. 여러 개의 catch문 2. 하나의 catch문에서 else 처리
-        catch errorName.empty {
-            delegate.showErrorAlert()
-        } catch errorMobile.empty {
-            delegate.showErrorAlert()
-        } catch errorMobile.rangeOver {
-            delegate.showErrorAlert()
-        } catch errorAddress.empty {
-            delegate.showErrorAlert()
-        } catch {
-//            if error as! errorName == errorName.empty {
-//                
-//            } else if error as errorAddress == errorAddress.empty {
-//                
-//            } ...
-        }
+        let parcelInformation: ParcelInformation = .init(receiver: Person(address: address, name: name, mobile: mobile), deliveryCost: cost, discount: discount)
+        delegate.parcelOrderMade(parcelInformation)
     }
     
     private func layoutView() {

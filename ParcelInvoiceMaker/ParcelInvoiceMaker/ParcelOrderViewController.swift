@@ -7,7 +7,7 @@
 import UIKit
 
 protocol ParcelOrderProtocol {
-    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
+    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) throws
 }
 
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
@@ -31,10 +31,17 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
     }
     
     func parcelOrderMade(_ parcelInformation: ParcelInformation) {
-        parcelOrderProcessor.process(parcelInformation: parcelInformation) { (parcelInformation) in
-            let invoiceViewController: InvoiceViewController = .init(parcelInformation: parcelInformation)
-            navigationController?.pushViewController(invoiceViewController, animated: true)
+        do {
+            try parcelOrderProcessor.process(parcelInformation: parcelInformation) { (parcelInformation) in
+                let invoiceViewController: InvoiceViewController = .init(parcelInformation: parcelInformation)
+                navigationController?.pushViewController(invoiceViewController, animated: true)
+            }
+        } catch personValidationError.nameCountLimitError {
+            showErrorAlert()
+        } catch {
+            
         }
+        
     }
     
     override func loadView() {

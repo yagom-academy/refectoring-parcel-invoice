@@ -33,6 +33,10 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
             }
         } catch personValidationError.nameCountLimitError {
             alertManager.showOneButtonAlert(viewController: self, title: "error", message: "name error")
+        } catch personValidationError.mobileCountLimitError {
+            alertManager.showOneButtonAlert(viewController: self, title: "error", message: "mobile error")
+        } catch personValidationError.addressCountLimitError {
+            alertManager.showOneButtonAlert(viewController: self, title: "error", message: "address error")
         } catch {
             
         }

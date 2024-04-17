@@ -9,6 +9,8 @@ import Foundation
 
 class DatabaseParcelInformationPersistence: parcelInformationPersistence {
     private let nameCountLimit = 10
+    private let mobileCountLimit = 13
+    private let addressCountLimit = 20
     
     func save(parcelInformation: ParcelInformation) throws {
         try validateParceInformation(parceInformation: parcelInformation)
@@ -20,9 +22,17 @@ class DatabaseParcelInformationPersistence: parcelInformationPersistence {
         guard parceInformation.receiver.name.count < nameCountLimit else {
             throw personValidationError.nameCountLimitError
         }
+        guard parceInformation.receiver.mobile.count < mobileCountLimit else {
+            throw personValidationError.mobileCountLimitError
+        }
+        guard parceInformation.receiver.address.count < addressCountLimit else {
+            throw personValidationError.addressCountLimitError
+        }
     }
 }
 
 enum personValidationError: Error {
     case nameCountLimitError
+    case mobileCountLimitError
+    case addressCountLimitError
 }

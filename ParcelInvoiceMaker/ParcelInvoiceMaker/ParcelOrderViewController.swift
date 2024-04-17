@@ -13,7 +13,7 @@ protocol ParcelOrderProtocol {
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
     private let parcelOrderProcessor: ParcelOrderProtocol
     
-    init(parcelOrderProcessor: ParcelOrderProtocol = ParcelOrderProcessor(parceInfoPersistence: DatabaseParcelInformationPersistence())){
+    init(parcelOrderProcessor: ParcelOrderProtocol){
         self.parcelOrderProcessor = parcelOrderProcessor
         
         super.init(nibName: nil, bundle: nil)

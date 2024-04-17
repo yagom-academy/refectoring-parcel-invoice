@@ -13,7 +13,7 @@ protocol parcelInformationPersistence {
 class ParcelOrderProcessor: ParcelOrderProtocol {
     private var parceInfoPersistence: parcelInformationPersistence
     
-    init(parceInfoPersistence: parcelInformationPersistence) {
+    init(parceInfoPersistence: parcelInformationPersistence = DatabaseParcelInformationPersistence()) {
         self.parceInfoPersistence = parceInfoPersistence
     }
     

@@ -17,7 +17,7 @@ class DatabaseParcelInformationPersistence: parcelInformationPersistence {
     }
     // 모델 검증 // 임시로 name만 진행
     func validateParceInformation(parceInformation: ParcelInformation) throws {
-        guard parceInformation.receiver.getName().count < nameCountLimit else {
+        guard parceInformation.receiver.name.count < nameCountLimit else {
             throw personValidationError.nameCountLimitError
         }
     }

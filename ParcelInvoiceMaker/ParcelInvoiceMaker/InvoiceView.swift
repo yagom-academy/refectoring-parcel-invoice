@@ -20,26 +20,27 @@ class InvoiceView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //yujeong - MARK: STEP 1-1 Refactoring Code (객체미용체조 7원칙)
     private func layoutView() {
         let nameLabel: UILabel = UILabel()
         nameLabel.textColor = .black
         nameLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        nameLabel.text = "이름 : \(parcelInformation.receiverName)"
+        nameLabel.text = "이름 : \(parcelInformation.receiverInfo.receiverName.value)" //value 값에 접근하여 출력 - yujeong
         
         let mobileLabel: UILabel = UILabel()
         mobileLabel.textColor = .black
         mobileLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        mobileLabel.text = "전화 : \(parcelInformation.receiverMobile)"
+        mobileLabel.text = "전화 : \(parcelInformation.receiverInfo.receiverMobile.value)"
         
         let addressLabel: UILabel = UILabel()
         addressLabel.textColor = .black
         addressLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        addressLabel.text = "주소 : \(parcelInformation.address)"
+        addressLabel.text = "주소 : \(parcelInformation.receiverInfo.address.value)"
         
         let costLabel: UILabel = UILabel()
         costLabel.textColor = .black
         costLabel.font = .preferredFont(forTextStyle: .largeTitle)
-        costLabel.text = "요금 : \(parcelInformation.discountedCost)"
+        costLabel.text = "요금 : \(parcelInformation.costInfo.discountedCost.value)"
                 
         let mainStackView: UIStackView = .init(arrangedSubviews: [nameLabel, mobileLabel, addressLabel, costLabel])
         mainStackView.axis = .vertical

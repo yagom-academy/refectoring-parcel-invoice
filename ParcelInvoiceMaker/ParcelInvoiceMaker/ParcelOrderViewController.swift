@@ -6,10 +6,19 @@
 
 import UIKit
 
+protocol ParcelOrder {
+    func initProcessor() -> ParcelOrderProcessor
+    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
+}
+
+//yujeong - MARK: STEP 1-3 Refactoring Code (SOLID DIP 적용)
+//ParcelOrderViewController에서 ParcelOrderProcessor 를 직접 소유하지 않기 위해 추상화 클래스 ParcelOrder를 활용
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
-    private let parcelProcessor: ParcelOrderProcessor = ParcelOrderProcessor()
+//    private let parcelProcessor: ParcelOrderProcessor = ParcelOrderProcessor(databaseParcelInfoPersistence: DatabaseParcelInformationPersistence())
+    private let parcelProcessor: ParcelOrder
     
-    init() {
+    init(parcelProcessor: ParcelOrder) {
+        self.parcelProcessor = parcelProcessor
         super.init(nibName: nil, bundle: nil)
         navigationItem.title = "택배보내기"
     }

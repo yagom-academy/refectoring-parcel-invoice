@@ -12,22 +12,17 @@ protocol ParcelOrderProtocol {
 
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
     private let parcelOrderProcessor: ParcelOrderProtocol
+    private let alertManager: alertManager
     
-    init(parcelOrderProcessor: ParcelOrderProtocol){
+    init(parcelOrderProcessor: ParcelOrderProtocol, alertManager: alertManager = AlertManager()){
         self.parcelOrderProcessor = parcelOrderProcessor
-        
+        self.alertManager = alertManager
         super.init(nibName: nil, bundle: nil)
         navigationItem.title = "택배보내기"
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func showErrorAlert() {
-        let alert = UIAlertController(title: "error", message: "error! error!", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "confirm", style: .default, handler: nil))
-        self.present(alert, animated: true)
     }
     
     func parcelOrderMade(_ parcelInformation: ParcelInformation) {
@@ -37,7 +32,7 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
                 navigationController?.pushViewController(invoiceViewController, animated: true)
             }
         } catch personValidationError.nameCountLimitError {
-            showErrorAlert()
+            alertManager.showOneButtonAlert(viewController: self, title: "error", message: "name error")
         } catch {
             
         }

@@ -6,14 +6,14 @@
 
 import Foundation
 
-protocol ParcelInformationPersistence {
+protocol parcelInformationPersistence {
     func save(parcelInformation: ParcelInformation) throws
 }
 
 class ParcelOrderProcessor: ParcelOrderProtocol {
-    private var parceInfoPersistence: ParcelInformationPersistence
+    private var parceInfoPersistence: parcelInformationPersistence
     
-    init(parceInfoPersistence: ParcelInformationPersistence) {
+    init(parceInfoPersistence: parcelInformationPersistence) {
         self.parceInfoPersistence = parceInfoPersistence
     }
     

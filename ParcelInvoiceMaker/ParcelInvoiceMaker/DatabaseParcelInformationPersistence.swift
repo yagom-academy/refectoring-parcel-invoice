@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DatabaseParcelInformationPersistence: ParcelInformationPersistence {
+class DatabaseParcelInformationPersistence: parcelInformationPersistence {
     private let nameCountLimit = 10
     
     func save(parcelInformation: ParcelInformation) throws {

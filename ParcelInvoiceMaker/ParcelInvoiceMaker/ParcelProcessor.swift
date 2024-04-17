@@ -18,11 +18,9 @@ class ParcelOrderProcessor: ParcelOrderProtocol {
     }
     
     // 택배 주문 처리 로직
-    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) throws {
+    func process(parcelInformation: ParcelInformation) async throws {
         
         // 데이터베이스에 주문 저장
         try parceInfoPersistence.save(parcelInformation: parcelInformation)
-        
-        onComplete(parcelInformation)
     }
 }

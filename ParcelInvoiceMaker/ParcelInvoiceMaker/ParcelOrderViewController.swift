@@ -7,7 +7,7 @@
 import UIKit
 
 protocol ParcelOrderProtocol {
-    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void) throws
+    func process(parcelInformation: ParcelInformation) async throws
 }
 
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
@@ -26,21 +26,23 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
     }
     
     func parcelOrderMade(_ parcelInformation: ParcelInformation) {
-        do {
-            try parcelOrderProcessor.process(parcelInformation: parcelInformation) { (parcelInformation) in
-                let invoiceViewController: InvoiceViewController = .init(parcelInformation: parcelInformation)
-                navigationController?.pushViewController(invoiceViewController, animated: true)
+        Task {
+            do {
+                try await parcelOrderProcessor.process(parcelInformation: parcelInformation)
+                DispatchQueue.main.async {
+                    let invoiceViewController: InvoiceViewController = .init(parcelInformation: parcelInformation)
+                    self.navigationController?.pushViewController(invoiceViewController, animated: true)
+                }
+            } catch personValidationError.nameCountLimitError {
+                alertManager.showOneButtonAlert(viewController: self, title: "error", message: "name error")
+            } catch personValidationError.mobileCountLimitError {
+                alertManager.showOneButtonAlert(viewController: self, title: "error", message: "mobile error")
+            } catch personValidationError.addressCountLimitError {
+                alertManager.showOneButtonAlert(viewController: self, title: "error", message: "address error")
+            } catch {
+                print(error)
             }
-        } catch personValidationError.nameCountLimitError {
-            alertManager.showOneButtonAlert(viewController: self, title: "error", message: "name error")
-        } catch personValidationError.mobileCountLimitError {
-            alertManager.showOneButtonAlert(viewController: self, title: "error", message: "mobile error")
-        } catch personValidationError.addressCountLimitError {
-            alertManager.showOneButtonAlert(viewController: self, title: "error", message: "address error")
-        } catch {
-            
         }
-        
     }
     
     override func loadView() {

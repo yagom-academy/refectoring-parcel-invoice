@@ -21,6 +21,8 @@
 		D4C5F2C32BC783C0008055B5 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5F2C22BC783C0008055B5 /* DIContainer.swift */; };
 		D4C5F2C52BC907B7008055B5 /* Discount.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5F2C42BC907B7008055B5 /* Discount.swift */; };
 		D4C5F2C72BC93246008055B5 /* ParcelInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5F2C62BC93246008055B5 /* ParcelInformation.swift */; };
+		D4C5F2CF2BCE0EE8008055B5 /* Receipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5F2CE2BCE0EE8008055B5 /* Receipt.swift */; };
+		D4C5F2D12BCE5C5F008055B5 /* ReceiptProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5F2D02BCE5C5F008055B5 /* ReceiptProcessor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		D4C5F2C22BC783C0008055B5 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		D4C5F2C42BC907B7008055B5 /* Discount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discount.swift; sourceTree = "<group>"; };
 		D4C5F2C62BC93246008055B5 /* ParcelInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParcelInformation.swift; sourceTree = "<group>"; };
+		D4C5F2CE2BCE0EE8008055B5 /* Receipt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receipt.swift; sourceTree = "<group>"; };
+		D4C5F2D02BCE5C5F008055B5 /* ReceiptProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptProcessor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +123,8 @@
 				D4C5F2C42BC907B7008055B5 /* Discount.swift */,
 				C741F50D2B46659500A4DDC0 /* ParcelOrderProcessor.swift */,
 				D4C5F2C02BC6A3FE008055B5 /* DatabaseParcelInformationPersistence.swift */,
+				D4C5F2CE2BCE0EE8008055B5 /* Receipt.swift */,
+				D4C5F2D02BCE5C5F008055B5 /* ReceiptProcessor.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -196,6 +202,7 @@
 				C741F4FE2B46658300A4DDC0 /* ParcelOrderViewController.swift in Sources */,
 				C741F5142B468AC300A4DDC0 /* InvoiceView.swift in Sources */,
 				D4C5F2C32BC783C0008055B5 /* DIContainer.swift in Sources */,
+				D4C5F2CF2BCE0EE8008055B5 /* Receipt.swift in Sources */,
 				D4C5F2C72BC93246008055B5 /* ParcelInformation.swift in Sources */,
 				C741F4FA2B46658300A4DDC0 /* AppDelegate.swift in Sources */,
 				C741F50E2B46659500A4DDC0 /* ParcelOrderProcessor.swift in Sources */,
@@ -203,6 +210,7 @@
 				D4C5F2BF2BC6A062008055B5 /* Receiver.swift in Sources */,
 				C741F5102B4675AF00A4DDC0 /* InvoiceViewController.swift in Sources */,
 				D4C5F2C12BC6A3FE008055B5 /* DatabaseParcelInformationPersistence.swift in Sources */,
+				D4C5F2D12BCE5C5F008055B5 /* ReceiptProcessor.swift in Sources */,
 				C741F5122B468AA300A4DDC0 /* ParcelOrderView.swift in Sources */,
 				C741F4FC2B46658300A4DDC0 /* SceneDelegate.swift in Sources */,
 			);

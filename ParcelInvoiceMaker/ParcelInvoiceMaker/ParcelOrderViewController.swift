@@ -11,7 +11,7 @@ protocol ParcelOrderProtocol {
 }
 
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
-    private var parcelOrderProcessor: ParcelOrderProtocol
+    private let parcelOrderProcessor: ParcelOrderProtocol
     
     init(parcelOrderProcessor: ParcelOrderProtocol = ParcelOrderProcessor(parceInfoPersistence: DatabaseParcelInformationPersistence())){
         self.parcelOrderProcessor = parcelOrderProcessor

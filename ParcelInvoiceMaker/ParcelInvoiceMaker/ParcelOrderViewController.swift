@@ -29,6 +29,7 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
         Task {
             do {
                 try await parcelOrderProcessor.process(parcelInformation: parcelInformation)
+                // actor학습 후 추후 수정
                 DispatchQueue.main.async {
                     let invoiceViewController: InvoiceViewController = .init(parcelInformation: parcelInformation)
                     self.navigationController?.pushViewController(invoiceViewController, animated: true)

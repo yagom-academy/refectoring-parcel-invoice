@@ -8,11 +8,11 @@
 import Foundation
 import UIKit
 
-protocol alertManager {
+protocol AlertProcessor {
     func showOneButtonAlert(viewController: UIViewController,title:String, message: String)
 }
 
-class AlertManager: alertManager {
+class AlertManager: AlertProcessor {
     func showOneButtonAlert(viewController: UIViewController,title:String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "confirm", style: .default, handler: nil))

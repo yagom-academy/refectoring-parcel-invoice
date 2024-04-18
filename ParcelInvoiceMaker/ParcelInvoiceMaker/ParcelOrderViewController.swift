@@ -12,9 +12,9 @@ protocol ParcelOrderProtocol {
 
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
     private let parcelOrderProcessor: ParcelOrderProtocol
-    private let alertManager: alertManager
+    private let alertManager: AlertProcessor
     
-    init(parcelOrderProcessor: ParcelOrderProtocol, alertManager: alertManager = AlertManager()){
+    init(parcelOrderProcessor: ParcelOrderProtocol, alertManager: AlertProcessor = AlertManager()){
         self.parcelOrderProcessor = parcelOrderProcessor
         self.alertManager = alertManager
         super.init(nibName: nil, bundle: nil)
@@ -34,11 +34,11 @@ class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
                     self.navigationController?.pushViewController(invoiceViewController, animated: true)
                 }
             } catch personValidationError.nameCountLimitError {
-                alertManager.showOneButtonAlert(viewController: self, title: "error", message: "name error")
+                alertManager.showOneButtonAlert(on: self, title: "error", message: "name error")
             } catch personValidationError.mobileCountLimitError {
-                alertManager.showOneButtonAlert(viewController: self, title: "error", message: "mobile error")
+                alertManager.showOneButtonAlert(on: self, title: "error", message: "mobile error")
             } catch personValidationError.addressCountLimitError {
-                alertManager.showOneButtonAlert(viewController: self, title: "error", message: "address error")
+                alertManager.showOneButtonAlert(on: self, title: "error", message: "address error")
             } catch {
                 print(error)
             }

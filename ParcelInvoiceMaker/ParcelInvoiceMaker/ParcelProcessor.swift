@@ -2,24 +2,33 @@
 //  ParcelInvoiceMaker - ParcelProcessor.swift
 //  Created by yagom.
 //  Copyright © yagom. All rights reserved.
-// 
+//
 
 import Foundation
+protocol DiscountStratege {
+    func applyDiscount(deliveryCost: Int) -> Int
+}
+class NoDiscount: DiscountStratege {
+    func applyDiscount(deliveryCost: Int) -> Int {
+        return deliveryCost
+    }
+}
+class VIPDiscount: DiscountStratege {
+    func applyDiscount(deliveryCost: Int) -> Int {
+        return deliveryCost / 5 * 4
+    }
+}
+class CouponDiscount: DiscountStratege {
+    func applyDiscount(deliveryCost: Int) -> Int {
+        return deliveryCost / 2
+    }
+}
 
 class ParcelInformation {
     var receiver: ReceiverInformation
     let deliveryCost: Int
     private let discount: Discount
-    var discountedCost: Int {
-        switch discount {
-        case .none:
-            return deliveryCost
-        case .vip:
-            return deliveryCost / 5 * 4
-        case .coupon:
-            return deliveryCost / 2
-        }
-    }
+    lazy var discountedCost: Int = discount.strategy.applyDiscount(deliveryCost: deliveryCost)
 
     init(receiver: ReceiverInformation,
          deliveryCost: Int,
@@ -32,6 +41,16 @@ class ParcelInformation {
 
 enum Discount: Int {
     case none = 0, vip, coupon
+    var strategy: DiscountStratege {
+        switch self {
+        case .none:
+            return NoDiscount()
+        case .vip:
+            return VIPDiscount()
+        case .coupon:
+            return CouponDiscount()
+        }
+    }
 }
 
 struct ReceiverInformation {

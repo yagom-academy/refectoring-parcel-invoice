@@ -58,7 +58,7 @@ struct ReceiverInformation {
     let name: String
     let mobile: String
 }
-class ParcelOrderProcessor {
+class ParcelOrderProcessor: ParcelOrderProcessorType {
     
     let parcelInformationPersistence: ParcelInformationPersistence
     // 택배 주문 처리 로직
@@ -86,4 +86,10 @@ class DatabaseParcelInformationPersistence: ParcelInformationPersistence {
 
 protocol ParcelInformationPersistence {
     func save(parcelInformation: ParcelInformation)
+}
+
+
+protocol ParcelOrderProcessorType {
+    var parcelInformationPersistence: ParcelInformationPersistence { get }
+    func process(parcelInformation: ParcelInformation, onComplete: (ParcelInformation) -> Void)
 }

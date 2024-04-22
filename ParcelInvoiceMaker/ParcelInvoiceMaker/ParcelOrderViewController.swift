@@ -7,9 +7,10 @@
 import UIKit
 
 class ParcelOrderViewController: UIViewController, ParcelOrderViewDelegate {
-    private let parcelProcessor: ParcelOrderProcessor = ParcelOrderProcessor()
+    var parcelProcessor: ParcelOrderProcessorType
     
-    init() {
+    init(parcelProcessor: ParcelOrderProcessorType) {
+        self.parcelProcessor = parcelProcessor
         super.init(nibName: nil, bundle: nil)
         navigationItem.title = "택배보내기"
     }

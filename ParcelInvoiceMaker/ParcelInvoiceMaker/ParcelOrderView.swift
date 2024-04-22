@@ -61,7 +61,7 @@ class ParcelOrderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc private func touchUpOrderButton(_ sender: UIButton) {
+    @objc private func touchUpOrderButton(_ sender: UIButton) throws {
         guard let name: String = receiverNameField.text,
               let mobile: String = receiverMobileField.text,
               let address: String = addressField.text,
@@ -77,9 +77,9 @@ class ParcelOrderView: UIView {
         }
         
         let parcelInformation: ParcelInformation = .init(address: address,
-                                                         receiverName: name,
-                                                         receiverMobile: mobile,
-                                                         deliveryCost: cost,
+                                                         receiverName: try Name(name),
+                                                         receiverMobile: try PhoneNumber(mobile),
+                                                         deliveryCost: try Cost(cost),
                                                          discount: discount)
         delegate.parcelOrderMade(parcelInformation)
     }
